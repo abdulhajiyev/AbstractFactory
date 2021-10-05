@@ -2,13 +2,20 @@
 {
     public class Application
     {
-        private readonly IButton _button;
-        private readonly ICheckbox _checkbox;
+        private IButton _button;
+        private ICheckbox _checkbox;
 
-        public Application(IGuiFactory factory)
+        private readonly IGuiFactory _guiFactory;
+
+        public Application(IGuiFactory guiFactory)
         {
-            _button = factory.CreateButton();
-            _checkbox = factory.CreateCheckbox();
+            _guiFactory = guiFactory;
+        }
+
+        public void CreateUi()
+        {
+           _button = _guiFactory.CreateButton();
+           _checkbox = _guiFactory.CreateCheckbox();
         }
 
         public void Paint()
@@ -16,5 +23,6 @@
             _button.Paint();
             _checkbox.Paint();
         }
+
     }
 }
